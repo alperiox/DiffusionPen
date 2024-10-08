@@ -29,7 +29,7 @@ OUTPUT_MAX_LEN = 95 #+ 2  # <GO>+groundtruth+<END>
 IMG_WIDTH = 256
 IMG_HEIGHT = 64
 
-c_classes = '_!"#&\'()*+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz '
+c_classes = '\\_!"#&\'()*+,-./0123456789:;?ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz '
 cdict = {c:i for i,c in enumerate(c_classes)}
 icdict = {i:c for i,c in enumerate(c_classes)}
 
@@ -410,7 +410,7 @@ def main():
     
     if args.dataset == 'iam':
         print('loading IAM')
-        iam_folder = '/home/konnik/iam_data/words'
+        iam_folder = 'iam_data/words'
         myDataset = IAMDataset
         style_classes = 339
         if args.level == 'word':
@@ -427,7 +427,7 @@ def main():
     elif args.dataset == 'gnhk':
         print('loading GNHK')
         myDataset = GNHK_Dataset
-        dataset_folder = '/home/konnik/datasets/GNHK'
+        dataset_folder = 'datasets/GNHK'
         style_classes = 515
         train_transform = transforms.Compose([
                             transforms.ToTensor(),
@@ -441,7 +441,7 @@ def main():
     train_loader = DataLoader(train_data, batch_size=args.batch_size, shuffle=True, num_workers=4)
 
     test_loader = DataLoader(test_data, batch_size=args.batch_size, shuffle=False, num_workers=4)
-    character_classes = ['!', '"', '#', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '?', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' ']
+    character_classes = ['!', '"', '#', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ':', ';', '?', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' ', "\\"]
     
     ######################### MODEL #######################################
     if args.model_name == 'wordstylist':
